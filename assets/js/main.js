@@ -146,6 +146,7 @@ let deleteAllBtn = document.getElementById("deleteAllBtn");
 let tbody = document.getElementById("tbody");
 let empCounter = document.getElementById("empCounter");
 let employees;
+let model = document.getElementById("model");
 let golbalID;
 let mood = "create";
 if (localStorage.length == 0) {
@@ -260,14 +261,10 @@ let showData = () => {
                       <td>${j + 1}</td>
                       <td>${employees[j].employeeName}</td>
                       <td>${employees[j].employeePosition}</td>
-                      <td>${employees[j].gross}</td>
-                      <td>${employees[j].tax}</td>
-                      <td>${employees[j].tranCost}</td>
-                      <td>${employees[j].bonus}</td>
-                      <td>${employees[j].total}</td>
-                      <td>${employees[j].department}</td>
+                      
                       <td><i onclick="removeOne(${j})" class="text-danger fs-4 fa-solid fa-trash-can"></i></td>
                       <td><i onclick="update(${j})" class="text-warning fs-4 fa-solid fa-pen-to-square"></i></td>
+                      <td><i onclick="showOne(${j})" class="fa-solid fa-eye fs-4"></i></td>
                    </tr>`;
   }
   tbody.innerHTML = tableRow;
@@ -301,3 +298,33 @@ let update = (j) => {
   creatBtn.innerHTML = `Update Emplyee Number: ${j + 1}`;
   creatBtn.classList.replace("btn-info", "btn-warning");
 };
+/*================================
+    Show One Employee information
+=================================*/
+let showOne = (j) => {
+  model.style.display = "flex";
+  model.innerHTML = `<div class="card">
+  <div class="card-header">${employees[j].employeeName}</div>
+  <div class="card-body">
+    <h5 class="card-title">Employee: ${employees[j].employeeName}</h5>
+    <hr>
+    <h5 class="card-title">Position: ${employees[j].employeePosition}</h5>
+    <hr>
+    <h5 class="card-title">Gross: ${employees[j].gross}</h5>
+    <hr>
+    <h5 class="card-title">Tax: ${employees[j].tax}%</h5>
+    <hr>
+    <h5 class="card-title">TranCost: ${employees[j].tranCost}</h5>
+    <hr>
+    <h5 class="card-title">Bonus: ${employees[j].bonus}</h5>
+    <hr>
+    <h5 class="card-title">Total: ${employees[j].total}</h5>
+    <hr>
+    <h5 class="card-title">Department: ${employees[j].department}</h5>
+    <hr>
+  </div>
+</div>`;
+};
+model.addEventListener("click", function () {
+  model.style.display = "none";
+});
